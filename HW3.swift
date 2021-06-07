@@ -13,40 +13,46 @@ var todosArray = [Todo]()
 var categoryArray = [Category]()
 func main(){
 	//TODO change it to one print
-	print(" ")
-	print("please enter a number");
-	print("1 add item")
-	print("2 view todo's list")
-	print("3 edit item")
-	print("4 delete item")
-	print("5 view sorted list")
-	print("6 create category")
-	print("7 add todos to category")
-	print("8 view category's todos")
+	let mainLog = """
+	please enter a number
+	1. add item
+	2. view todo's list
+	3. edit item
+	4. delete item
+	5. view sorted list
+	6. create category
+	7. add todos to category
+	8. view category's todos
+	"""
+	print(mainLog)
 	if let typed = readLine() {
 		if let number = Int(typed) {
 		print(" ")
 		//TODO change it to switch case
-			if(number==1){
+		switch number {
+			case 1:
 				addItem()
-			}else if(number==2){
+			case 2:
 				viewTodoList(todosArrayInput: todosArray)
-			}else if(number==3){
+			case 3:
 				editItem()
-			}else if(number==4){
+			case 4:
 				deleteItem()
-			}else if(number==5){
+			case 5:
 				sortItem()
-			}else if(number==6){
+			case 6:
 				createCategory()
-			}else if(number==7){
+			case 7:
 				addItemToCategory()
-			}else if(number==8){
+			case 8:
 				viewCategoryTodos()
-			}else{
+			default:
 				print("not valid!")
 				main()
 			}
+
+
+		}
 		}
 	}
 	
@@ -154,20 +160,23 @@ func sortItem(){
 		}
 	}
 	//TODO change it to switch
-	if(optionForSort==1){
-		viewTodoList(todosArrayInput: todosArray)
-	}else if(optionForSort==2){
-		viewTodoList(todosArrayInput: todosArray.reversed())
-	}else if(optionForSort==3){
-		viewTodoList(todosArrayInput: todosArray.sorted(by: titleAsc))
-	}else if(optionForSort==4){
-		viewTodoList(todosArrayInput: todosArray.sorted(by: titleAsc).reversed())
-	}else if(optionForSort==5){
-		viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc))
-	}else if(optionForSort==6){
-		viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc).reversed())
+	switch optionForEdit {
+		
+		case 1:
+			viewTodoList(todosArrayInput: todosArray)
+		case 2:
+			viewTodoList(todosArrayInput: todosArray.reversed())
+		case 3:
+			viewTodoList(todosArrayInput: todosArray.sorted(by: titleAsc))
+		case 4:
+			viewTodoList(todosArrayInput: todosArray.sorted(by: titleAsc).reversed())
+		case 5:
+			viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc))
+		case 6:
+			viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc).reversed())
 	}
 
+	}
 
 
 	main()
