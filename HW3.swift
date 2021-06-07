@@ -12,6 +12,7 @@ class Category {
 var todosArray = [Todo]()
 var categoryArray = [Category]()
 func main(){
+	//TODO change it to one print
 	print(" ")
 	print("please enter a number");
 	print("1 add item")
@@ -25,6 +26,7 @@ func main(){
 	if let typed = readLine() {
 		if let number = Int(typed) {
 		print(" ")
+		//TODO change it to switch case
 			if(number==1){
 				addItem()
 			}else if(number==2){
@@ -90,12 +92,15 @@ func editItem(){
 			idForEdit = num
 		}
 	}
-	print("previous todo : id: \(todosArray[idForEdit].id) ,title: \(todosArray[idForEdit].title) ,content: \(todosArray[idForEdit].content) ,priority: \(todosArray[idForEdit].priority)")
+	
+	print("previous todo: id: \(todosArray[idForEdit].id) ,title: \(todosArray[idForEdit].title) ,content: \(todosArray[idForEdit].content) ,priority: \(todosArray[idForEdit].priority)")
+	//TODO change it to one print call
 	print("select an option to edit:")
 	print("1 edit title")
 	print("2 edit content")
 	print("3 edit priority")
 	var optionForEdit = 0
+
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			optionForEdit = num
@@ -142,11 +147,13 @@ func sortItem(){
 	print("5 sort by priority asc")
 	print("6 sort by priority des")
 	var optionForSort = 0
+
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			optionForSort = num
 		}
 	}
+	//TODO change it to switch
 	if(optionForSort==1){
 		viewTodoList(todosArrayInput: todosArray)
 	}else if(optionForSort==2){
@@ -234,6 +241,7 @@ func viewCategoryTodos(){
 }
 
 
+//TODO add type to functions
 
 
 
@@ -243,10 +251,5 @@ func viewCategoryTodos(){
 
 
 
-
-print("Hello!")
+print("Welcome!")
 main()
-//print("I love Swift.")
-//print("Please Enter your favorite programming language", terminator: ".")
-//let name = readLine()
-//print("Your favorite programming language is \(name!).")
