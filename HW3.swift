@@ -1,34 +1,37 @@
+
+// classes
 class Todo {
 	var id = 0;
 	var title = "";
 	var content = "";
 	var priority = 0;
 }
+
 class Category {
 	var id = 0;
 	var name = "";
 	var members = [Todo]()
 }
+
+//db
 var todosArray = [Todo]()
 var categoryArray = [Category]()
+
 func main(){
-	//TODO change it to one print
-	let mainLog = """
-	please enter a number
-	1. add item
-	2. view todo's list
-	3. edit item
-	4. delete item
-	5. view sorted list
-	6. create category
-	7. add todos to category
-	8. view category's todos
+	let mainMessage = """
+	Please choose an option:
+	1. add item.
+	2. view task's list.
+	3. edit item.
+	4. delete item.
+	5. view sorted list.
+	6. create category.
+	7. add task to category.
+	8. view category's todos.
 	"""
-	print(mainLog)
+	print(mainMessage)
 	if let typed = readLine() {
 		if let number = Int(typed) {
-		print(" ")
-		//TODO change it to switch case
 		switch number {
 			case 1:
 				addItem()
@@ -50,61 +53,76 @@ func main(){
 				print("not valid!")
 				main()
 			}
-
-
-		}
 		}
 	}
-	
 }
+	
+
 
 
 func addItem(){
-	
-	let newTodo = Todo();
-	
-	print("please enter title:")
+	let newTask = Todo();
+	print("Please enter title:")
 	let itemTitle = readLine()
-	newTodo.title = itemTitle!
-	print("enter content")
+	newTask.title = itemTitle!
+	print("Enter description:")
 	let itemContent = readLine()
-	newTodo.content = itemContent!
-	print("enter priority")
+	newTask.content = itemContent!
+	print("Enter priority (0-10):")
 	if let typed = readLine() {
 		if let num = Int(typed) {
-			newTodo.priority = num
+			newTask.priority = num
 		}
 	}
-	newTodo.id = todosArray.count 
-	todosArray.append(newTodo)
-	print("task added!")
+	newTask.id = todosArray.count 
+	todosArray.append(newTask)
+	print("Task successfully added!")
 	main()
 }
 
 
 func viewTodoList(todosArrayInput todosArrayInputA: [Todo]){
 	for iTodo in todosArrayInputA{
-		print( "id: \(iTodo.id) ,title: \(iTodo.title) ,content: \(iTodo.content) ,priority: \(iTodo.priority)")
+		let result = """
+		---------------------------
+		id: \(iTodo.id)
+		title: \(iTodo.title)
+		description: \(iTodo.content)
+		priority: \(iTodo.priority)
+		---------------------------
+		"""
+		print(result)
 	}
 	main()
 }
 
 
 func editItem(){
-	print("enter id of todo to edit")
-	var idForEdit = 0
+	print("Enter id of task to edit:")
+	var id = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
-			idForEdit = num
+			id = num
 		}
 	}
+	let editItemMessage = """
+	select an option to edit:
+	1. edit title.
+	2. edit description.
+	3. edit priority.
+	"""
+	let result = """
+	-------------------------------------------
+	previous task:
+	id: \(id)
+	title: \(todosArray[id].title)
+	description: \(todosArray[id].content)
+	priority: \(todosArray[id].priority)
+	-------------------------------------------
+	"""
 	
-	print("previous todo: id: \(todosArray[idForEdit].id) ,title: \(todosArray[idForEdit].title) ,content: \(todosArray[idForEdit].content) ,priority: \(todosArray[idForEdit].priority)")
-	//TODO change it to one print call
-	print("select an option to edit:")
-	print("1 edit title")
-	print("2 edit content")
-	print("3 edit priority")
+	print(result)
+	print(editItemMessage)
 	var optionForEdit = 0
 
 	if let typed = readLine() {
@@ -112,56 +130,58 @@ func editItem(){
 			optionForEdit = num
 		}
 	}
-	if(optionForEdit==1){
-		print("input new title")
-		let itemNewTitle = readLine()
-		todosArray[idForEdit].title = itemNewTitle!
-	}else if(optionForEdit==2){
-		print("input new content")
-		let itemNewContent = readLine()
-		todosArray[idForEdit].content = itemNewContent!
-	}else if(optionForEdit==3){
-		print("input new priority")
-		if let typed = readLine() {
-			if let num = Int(typed) {
-				todosArray[idForEdit].priority = num
+	switch optionForEdit {
+		case 1:
+			print("Enter new title")
+			let itemNewTitle = readLine()
+			todosArray[id].title = itemNewTitle!
+		case 2:
+			print("Enter new description")
+			let itemNewContent = readLine()
+			todosArray[id].content = itemNewContent!
+		case 3:
+			print("Enter new priority")
+			if let typed = readLine() {
+				if let num = Int(typed) {
+					todosArray[id].priority = num
+				}
 			}
-		}
+		default:
+			print("invalid number!")
 	}
-	print("edited")
-	
+	print("Successfully edited!")
 	main()
 }
 func deleteItem(){
-	print("enter id of todo to delete")
-	var idForDelete = 0
+	print("Enter id of task to delete")
+	var id = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
-			idForDelete = num
+			id = num
 		}
 	}
-	todosArray.remove(at: idForDelete)
-	
+	todosArray.remove(at: id)
 	main()
 }
 func sortItem(){
-	print("select an option to sort:")
-	print("1 sort by create time asc")
-	print("2 sort by create time des")
-	print("3 sort by title asc")
-	print("4 sort by title des")
-	print("5 sort by priority asc")
-	print("6 sort by priority des")
+	let sortMessage = """
+		select an option to sort:
+		1. Sort by creation time asc.
+		2. Sort by creation time des.
+		3. Sort by title asc.
+		4. Sort by title des.
+		5. Sort by priority asc.
+		6. Sort by priority des.
+	"""
+	print(sortMessage)
 	var optionForSort = 0
-
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			optionForSort = num
 		}
 	}
-	//TODO change it to switch
-	switch optionForEdit {
 		
+	switch (optionForSort) {
 		case 1:
 			viewTodoList(todosArrayInput: todosArray)
 		case 2:
@@ -174,24 +194,24 @@ func sortItem(){
 			viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc))
 		case 6:
 			viewTodoList(todosArrayInput: todosArray.sorted(by: priorityAsc).reversed())
-	}
+		default:
+			print("Not valid input!")
 
 	}
-
-
 	main()
 }
+
 func titleAsc(_ s1: Todo, _ s2: Todo)->Bool{
-	return s1.title<s2.title
+	return s1.title < s2.title
 }
 
 func priorityAsc(_ s1: Todo, _ s2: Todo)->Bool{
-	return s1.priority<s2.priority
+	return s1.priority < s2.priority
 }
 
 
 func createCategory(){
-	print("please enter name:")
+	print("Please enter name:")
 	let itemTitle = readLine()
 	var isRepeated = 0
 	for catI in categoryArray{
@@ -200,27 +220,27 @@ func createCategory(){
 		}
 	}
 	
-	if(isRepeated == 0){
+	if isRepeated == 0 {
 		let newCategory = Category();
 		newCategory.name = itemTitle!
 		newCategory.id = categoryArray.count 
 		categoryArray.append(newCategory)
-		print("category created!")
-	}else{
-		print("name is repeated!")
+		print("Category successfully created!")
+	} else {
+		print("Name is repetitive!")
 	}
 
 	main()
 }
 func addItemToCategory(){
-	print("enter category id")
+	print("Enter category id:")
 	var catId = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			catId = num
 		}
 	}
-	print("enter todo id")
+	print("Enter task id:")
 	var todoId = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
@@ -228,37 +248,32 @@ func addItemToCategory(){
 		}
 	}
 	categoryArray[catId].members.append(todosArray[todoId])
-	print("added!")
-	
-	
+	print("Successfully added!")
 	main()
 }
 func viewCategoryTodos(){
-	print("enter category id")
-	var catIdA = 0
+	print("Enter category id")
+	var categoryId = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
-			catIdA = num
+			categoryId = num
 		}
 	}
-	print(categoryArray[catIdA].name)
-	for catItem in categoryArray[catIdA].members{
-		print( "id: \(catItem.id) ,title: \(catItem.title) ,content: \(catItem.content) ,priority: \(catItem.priority)")
+	print(categoryArray[categoryId].name)
+	for catItem in categoryArray[categoryId].members{
+		let result = """
+		id: \(catItem.id)
+		title: \(catItem.title)
+		description: \(catItem.content)
+		priority: \(catItem.priority)
+		"""
+		print(result)
 	}
-	
 	main()
 }
 
 
 //TODO add type to functions
-
-
-
-
-
-
-
-
 
 print("Welcome!")
 main()
