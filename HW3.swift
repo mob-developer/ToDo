@@ -13,7 +13,7 @@ var todosArray = [Todo]()
 var categoryArray = [Category]()
 func main(){
 	print(" ")
-	print("please input a number");
+	print("please enter a number");
 	print("1 add item")
 	print("2 view todo's list")
 	print("3 edit item")
@@ -55,13 +55,13 @@ func addItem(){
 	
 	let newTodo = Todo();
 	
-	print("please input title:")
+	print("please enter title:")
 	let itemTitle = readLine()
 	newTodo.title = itemTitle!
-	print("input content")
+	print("enter content")
 	let itemContent = readLine()
 	newTodo.content = itemContent!
-	print("input priority")
+	print("enter priority")
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			newTodo.priority = num
@@ -69,7 +69,7 @@ func addItem(){
 	}
 	newTodo.id = todosArray.count 
 	todosArray.append(newTodo)
-	print("Todo added!")
+	print("task added!")
 	main()
 }
 
@@ -91,7 +91,7 @@ func editItem(){
 		}
 	}
 	print("previous todo : id: \(todosArray[idForEdit].id) ,title: \(todosArray[idForEdit].title) ,content: \(todosArray[idForEdit].content) ,priority: \(todosArray[idForEdit].priority)")
-	print("select an option for edit:")
+	print("select an option to edit:")
 	print("1 edit title")
 	print("2 edit content")
 	print("3 edit priority")
@@ -134,13 +134,13 @@ func deleteItem(){
 	main()
 }
 func sortItem(){
-	print("select an option for sort:")
-	print("1 sort create time asc")
-	print("2 sort create time des")
-	print("3 sort title asc")
-	print("4 sort title des")
-	print("5 sort priority asc")
-	print("6 sort priority des")
+	print("select an option to sort:")
+	print("1 sort by create time asc")
+	print("2 sort by create time des")
+	print("3 sort by title asc")
+	print("4 sort by title des")
+	print("5 sort by priority asc")
+	print("6 sort by priority des")
 	var optionForSort = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
@@ -175,7 +175,7 @@ func priorityAsc(_ s1: Todo, _ s2: Todo)->Bool{
 
 
 func createCategory(){
-	print("please input name:")
+	print("please enter name:")
 	let itemTitle = readLine()
 	var isRepeated = 0
 	for catI in categoryArray{
@@ -197,14 +197,14 @@ func createCategory(){
 	main()
 }
 func addItemToCategory(){
-	print("input category id")
+	print("enter category id")
 	var catId = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
 			catId = num
 		}
 	}
-	print("input todo id")
+	print("enter todo id")
 	var todoId = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
@@ -218,7 +218,7 @@ func addItemToCategory(){
 	main()
 }
 func viewCategoryTodos(){
-	print("input category id")
+	print("enter category id")
 	var catIdA = 0
 	if let typed = readLine() {
 		if let num = Int(typed) {
